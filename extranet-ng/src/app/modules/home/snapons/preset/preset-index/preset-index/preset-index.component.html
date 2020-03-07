@@ -1,0 +1,65 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+
+        <div class="hm-gradient">
+            <div class="card1 col-md-12 mb-4">
+                <div class="card-body">
+                    <!--Table-->
+                    <span class="list-text"> Preset List</span>
+                    <div>
+                        <button type="submit" class="btn btn-primary custom-btn" routerLink="/preset/form">Create</button>
+                    </div>
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Hot Sell</th>
+                                <th>New Sell</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr
+                                *ngFor="let list of presets | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                <td><i class="fa fa-certificate" aria-hidden="true"></i></td>
+                                <td>{{list.name}}</td>
+                                <td><label class="toggle">
+                                    <input type="checkbox" (click)="onClick_hot($event)" value="{{list | json}}"
+                                        [checked]="list.hot_selling == 1 ? true : false" />
+                                    <span class="slider"></span>
+                                </label></td>
+                                <td><label class="toggle">
+                                    <input type="checkbox" (click)="onClick_new($event)" value="{{list | json}}"
+                                        [checked]="list.new == 1 ? true : false" />
+                                    <span class="slider"></span>
+                                </label></td>
+                                <td><img src={{url+list.image}} height=50 width=80 alt=""> </td>
+                                <td>{{list.description}}</td>
+                                <!-- <td><label class="toggle">
+                                        <input type="checkbox" (click)="onClick($event)" value="{{list | json}}"
+                                            [checked]="list.new == 1 ? true : false" />
+                                        <span class="slider"></span>
+                                    </label></td> -->
+
+
+                                <td><button type="submit" class="btn btn-primary"
+                                        routerLink="/preset/form/{{list.id}}">edit</button></td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

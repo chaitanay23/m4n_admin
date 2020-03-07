@@ -1,0 +1,76 @@
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.upload-btn-wrapper .fa {
+    font-size: 22px;
+    color: #c7c7c7;
+}
+
+.btn {
+    height: 50px;
+    border: 1px solid #cecccc;
+    padding: 8px 20px;
+    border-radius: 32px;
+    font-size: 20px;
+    text-align: left;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.form-group label {
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+}
+
+.form-group input {
+    height: 50px;
+    border: 1px solid #e0dfdf;
+    border-radius: 32px;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #253444;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(244, 67, 54, 0);
+}
+
+form.form-section {
+    background: #fff;
+    padding: 32px;
+}
+
+.custom-check {
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+}
+
+.custom-textarea {
+    height: 120px;
+}
+
+.custom-btn {
+    background: #253444;
+    border: none;
+}
+
+select.form-control:not([size]):not([multiple]) {
+    height: 50px;
+    border: none;
+    box-shadow: 1px 2px 6px 0px #ddd;
+}

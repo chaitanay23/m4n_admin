@@ -1,0 +1,71 @@
+<nav id="sidebar">
+    <ul class="list-unstyled components">
+        <li class="active">
+            <a [routerLink]="'/dashboard'"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a>
+        </li>
+        <li>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-user"
+          aria-hidden="true"></i> Users</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu" style="margin-top: 0px;">
+                <li>
+                    <a [routerLink]="'/admin/index'">Admins</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/index','factory']">Factory Users</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/index','custCare']">CustomerCare Users</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/index','partner']">Partners</a>
+                </li>
+                <!-- <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li> -->
+            </ul>
+        </li>
+
+        <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-paint-brush" aria-hidden="true"></i>
+Snapons</a>
+            <ul class="collapse list-unstyled" id="pageSubmenu" style="margin-top: 0px;">
+                <li>
+                    <a [routerLink]="'/item/index'">List Items</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/package/index'">Packages</a>
+                </li>
+                <li>
+                    <a [routerLink]="'/preset/index'" href="#">Presets</a>
+                </li>
+            </ul>
+
+        <li>
+            <a href="#portalSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-link" aria-hidden="true"></i>
+Portals</a>
+            <ul class="collapse list-unstyled" id="portalSubmenu" style="margin-top: 0px;">
+                <li>
+                    <a href="http://factory.madfornails.com/" (click)="sendFactory()">Factory</a>
+                </li>
+                <li>
+                    <a href="http://partner.madfornails.com/" (click)="sendPartner()">Partner</a>
+                </li>
+                <li>
+                    <a href="http://custcare.madfornails.com/" (click)="sendCustomerCare()">Customer Care</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a [routerLink]="'/order/index'" href="#"><i class="fa fa-briefcase"></i>Orders</a>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-id-card"></i>Contact</a>
+        </li>
+        <li>
+            <a  (click)="logout()"><i class="fa fa-sign-out"></i>logout</a>
+        </li>
+    </ul>
+</nav>

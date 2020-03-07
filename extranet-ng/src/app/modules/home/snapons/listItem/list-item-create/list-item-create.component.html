@@ -1,0 +1,113 @@
+
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+        
+        <div class="row align-items-end Dashboard-design">
+            <div class="col-sm-12 mb-4 pl-3">
+                <form class="form-section" [formGroup]="listItemForm" >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="text">Name:</label>
+                                <input type="text" class="form-control" [(ngModel)]="pre_name"  formControlName="name">
+                            </div>
+                            <div *ngIf="listItemForm.controls['name'].invalid && (listItemForm.controls['name'].dirty || listItemForm.controls['name'].touched)" class="alert alert-danger">
+                              <div *ngIf="listItemForm.controls['name'].errors.required">
+                                Name is required.
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="number" class="form-control" [(ngModel)]="pre_price" id="price" formControlName="price">
+                            </div>
+                            <div *ngIf="listItemForm.controls['price'].invalid && (listItemForm.controls['price'].dirty || listItemForm.controls['price'].touched)" class="alert alert-danger">
+                              <div *ngIf="listItemForm.controls['price'].errors.required">
+                                Price is required.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="item_code">Item Code:</label>
+                                <input type="text" class="form-control" [(ngModel)]="pre_item" id="item_code" formControlName="item_code">
+                            </div>
+                            <div *ngIf="listItemForm.controls['item_code'].invalid && (listItemForm.controls['item_code'].dirty || listItemForm.controls['item_code'].touched)" class="alert alert-danger">
+                              <div *ngIf="listItemForm.controls['item_code'].errors.required">
+                                Item code is required.
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class= "form-group">
+                              <label for="type">Type:</label>
+                              <select class="color_dropdown form-control" name="color" [(ngModel)]="pre_type" formControlName="item_type">
+                                  <option value="" disabled selected>Select any type</option>
+                                  <option value="color-gloss">Color Gloss</option>
+                                  <option value="color-matte">Color Matte</option>
+                                  <option value="glitter">Glitter</option>
+                                  <option value="pattern">Pattern</option>
+                                  <option value="jewellery">Jewellery</option>
+                                  <option value="sticker">Sticker</option>
+                              </select>
+                            </div>
+                            <div *ngIf="listItemForm.controls['item_type'].invalid && (listItemForm.controls['item_type'].dirty || listItemForm.controls['item_type'].touched)" class="alert alert-danger">
+                              <div *ngIf="listItemForm.controls['item_type'].errors.required">
+                                Type is required.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 ">
+                            <div class="form-group ">
+                                <label for="image">Image:</label>
+                                <input type="file" name="image_url" class="form-control" (change)="imageUpload($event)" required/>
+                                <img *ngIf="pre_imageUrl" [src]="pre_imageUrl" alt="Image" class="thumbnail_image">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="brand_image">Brand Image:</label>
+                                <input type="file" name="brand_image"  class="form-control " (change)="brandImageUpload($event)"/>
+                                <img *ngIf="pre_brandUrl" [src]="pre_brandUrl" alt="Image" class="thumbnail_image">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                       <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="price">Finger Limit:</label>
+                                <input type="number" class="form-control" [(ngModel)]="pre_limit" id="finger_limit" formControlName="limit">
+                            </div>
+                            <div *ngIf="listItemForm.controls['limit'].invalid && (listItemForm.controls['limit'].dirty || listItemForm.controls['limit'].touched)" class="alert alert-danger">
+                              <div *ngIf="listItemForm.controls['limit'].errors.required">
+                                Finger Limit is required.
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control custom-textarea" [(ngModel)]="pre_desc" id="description" placeholder="type here message.." formControlName="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="onSubmit(listItemForm.value)" type="submit" class="btn btn-primary custom-btn" *ngIf="!this.isButtonVisible"  [disabled]="listItemForm.pristine || listItemForm.invalid">Submit</button>
+                    <button (click)="updateItem()" class="btn btn-primary custom-update-btn" *ngIf="this.isButtonVisible" >Update</button>
+                </form>
+
+            </div>
+        </div>
+
+

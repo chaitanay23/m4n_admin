@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+
+        <div class="hm-gradient">
+            <div class="card1 col-md-12 mb-4">
+                <div class="card-body">
+                    <!--Table-->
+                    <span class="list-text"> {{paramName}} List</span>
+                    <div>
+                        <button type="submit" class="btn btn-primary custom-btn" routerLink="/item/form">Create</button>
+                    </div>
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile Number</th>
+                                <th>Username</th>
+                                
+
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr
+                                *ngFor="let list of userDetails | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                <td><i class="fa fa-certificate" aria-hidden="true"></i></td>
+                                <td>{{list.name}}</td>
+                                <td>{{list.email}}</td>
+                                <td>{{list.mobileNumber}} </td>
+                                
+                                 </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+      <div class="hm-gradient">
+            <div class="card1 mb-4">
+                <div class="card-body">
+                    <!--Table-->
+                    <span class="list-text"> Order List</span>
+
+                   <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Reference ID</th>
+                                <th>Customer Name</th>
+                                <th>Net Payable</th>
+                                <th>Status</th>
+                                <th>AWB Number</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr *ngFor = "let list of orderList | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                <td><i class="fa fa-certificate" aria-hidden="true"></i></td>
+                                <td>{{list.reference_id}}</td>
+                                <td>{{list.user.name}}</td>
+                                <td>{{list.netPayable}}</td>
+                                <td [class.pending_order]="list.internalStatus == 'pending'"
+                                    [class.failed_order]="list.internalStatus == 'failed'"
+                                    [class.success_order]="list.internalStatus != 'pending'">
+                                {{list.status}}</td>
+                                <td>{{list.awb_number?list.awb_number:'--'}}</td>
+                                <td><button type="submit" class="btn btn-primary" routerLink="/order/show/{{list.id}}">edit</button></td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

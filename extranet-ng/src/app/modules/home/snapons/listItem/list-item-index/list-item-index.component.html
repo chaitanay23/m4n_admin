@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+        
+        <div class="hm-gradient">
+            <div class="card1 mb-4">
+                <div class="card-body">
+                    <!--Table-->
+                    <span class="list-text"> ListItem List</span>
+                    <div>
+                      <button type="submit" class="btn btn-primary custom-btn" routerLink="/item/form">create</button>
+                    </div>
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Item Code</th>
+                                <th>Type</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr *ngFor = "let list of this.listItems | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                <td><i class="fa fa-certificate" aria-hidden="true"></i></td>
+                                <td>{{list.title}}</td>
+                                <td>{{list.price}}</td>
+                                <td>{{list.item_code}}</td>
+                                <td>{{list.type}}</td>
+                                <td><button type="submit" class="btn btn-primary" routerLink="/item/form/{{list.id}}">edit</button></td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

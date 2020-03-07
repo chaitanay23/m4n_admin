@@ -1,0 +1,137 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+      <div class="row align-items-end Dashboard-design">
+        <div class="col-sm-12 mb-4 pl-3">
+          <div class="show-background">
+            <h2 class="show-heading">Order Description</h2>
+            <hr/>
+            <div class="row">
+              <div class="col-md-6">
+                <div><span class="h5">Reference ID: </span> {{orderDetail.reference_id}}</div>
+                <div><span class="h5">AWB Number: </span> {{orderDetail.awb_number}}</div>
+                <div><span class="h5">Customer Name: </span> {{orderDetail.user.name}}</div>
+                <div><span class="h5">Customer Mobile Number: </span> {{orderDetail.user.mobileNumber}}</div>
+                <div><span class="h5">Customer Email:</span> {{orderDetail.user.email}}</div>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Order Status: </span><span [class.pending_order]="orderDetail.internalStatus == 'pending'"
+                                    [class.failed_order]="orderDetail.internalStatus == 'failed'"
+                                    [class.success_order]="orderDetail.internalStatus != 'pending'">
+                {{orderDetail.status}}</span></div>
+                <div><span class="h5">Discount Amount:</span> {{orderDetail.discountAmount}}</div>
+                <div><span class="h5">GST Charges:</span> {{orderDetail.product_gst_tax + orderDetail.delivery_gst_tax}}</div>
+                <div><span class="h5">Delivery Charges:</span> {{orderDetail.delivery_charges}}</div>
+                <div><span class="h5">Order Amount:</span> {{orderDetail.netPayable}}</div>
+
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Address Details: </h4>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Name:</span> {{orderDetail.address.name}}</div>
+                <div><span class="h5">Address Type:</span> {{orderDetail.address.type}}</div>
+                <div><span class="h5">Address:</span> {{orderDetail.address.address}}</div>
+                <div><span class="h5">Pincode:</span> {{orderDetail.address.zipcode}}</div>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Mobile:</span> {{orderDetail.address.mobile}}</div>
+                <div><span class="h5">State:</span> {{orderDetail.address.state}}</div>
+                <div><span class="h5">City:</span> {{orderDetail.address.city}}</div>
+                <div><span class="h5">Area:</span> {{orderDetail.address.area}}</div>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Finger Sizes:</h4>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">LF1:</span> {{orderDetail.finger.lf1}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">LF2:</span> {{orderDetail.finger.lf2}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">LF3:</span> {{orderDetail.finger.lf3}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">LF4:</span> {{orderDetail.finger.lf4}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">LF5:</span> {{orderDetail.finger.lf5}}</div>
+              </div>
+              <div class="col-md-2">
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">RF1:</span> {{orderDetail.finger.rf1}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">RF2:</span> {{orderDetail.finger.rf2}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">RF3:</span> {{orderDetail.finger.rf3}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">RF4:</span> {{orderDetail.finger.rf4}}</div>
+              </div>
+              <div class="col-md-2">
+                <div><span class="h5">RF5:</span> {{orderDetail.finger.rf5}}</div>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+            <hr *ngIf="orderDetail.payment"/>
+            <div class="row" *ngIf="orderDetail.payment">
+              <div class="col-md-12">
+                <h4>Payment Details: </h4>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Tracking ID:</span> {{orderDetail.payment.tracking_id}}</div>
+                <div><span class="h5">Amount:</span> {{orderDetail.payment.amount}}</div>
+                <div><span class="h5">Currency:</span> {{orderDetail.payment.currency}}</div>
+                <div><span class="h5">Bank reference no.:</span> {{orderDetail.payment.bank_ref_no}}</div>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Payment Mode:</span> {{orderDetail.payment.payment_mode}}</div>
+                <div><span class="h5">Payment Status:</span> {{orderDetail.payment.order_status}}</div>
+                <div><span class="h5">Card Number:</span> {{orderDetail.payment.card_number}}</div>
+                <div><span class="h5">Message:</span> {{orderDetail.payment.status_message}}</div>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-md-12">
+                <h4>Cart Details:</h4>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Total Packages:</span> {{orderDetail.cart.totalPackage}}</div>
+              </div>
+              <div class="col-md-6">
+                <div><span class="h5">Total Items:</span> {{orderDetail.cart.totalItems}}</div>
+              </div>
+              <table class="table table-striped mt-4">
+                <thead>
+                    <tr>
+                        <th>Packages Name</th>
+                        <th>Packages Description</th>
+                        <th>Preview</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let list of orderDetail.cart.cartItems">
+                        <td>{{list.package.name}}</td>
+                        <td>{{list.package.description}}</td>
+                        <td><img class="thumbnail_image" src={{url+list.preview_image}}/></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

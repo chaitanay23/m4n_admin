@@ -1,0 +1,106 @@
+<div class="wrapper">
+    <app-sidebar ></app-sidebar>
+    <div id="content">
+        
+        <div class="row align-items-end Dashboard-design">
+            <div class="col-sm-12 mb-2 mt-2">
+                    <div class="card" style="height:auto;">
+                        <div class="header-part">
+                            <div class="item">
+                                <h5>Welcome to dashboard</h5>
+                            </div>
+                            <div class="item">
+                                <input type="button" class="btn btn-outline-primary " [ngClass]="{'active':isClicked}" value="2019" (click)="uploadGPH($event)">
+                                <input type="button" class="btn btn-outline-primary ml-2" [ngClass]="{'active':isClicked2}" value="2020" (click)="uploadGPH($event)">
+                            </div>
+                            </div>
+                                </div>
+            </div>
+            <div class="col-sm-4 mb-3 mt-2">
+                <div class="card card-user" style="height:auto;">
+                    <div class="ico-part">
+                        <div class="item">
+                                <i class="fa fa-users fa-2x"></i><i class="custom-text">USERS</i>
+                        </div>
+                        <div class="item">
+                <h5 class="count"> {{userCount}}
+                    </h5>
+                </div>
+                </div>
+                    </div>
+        </div>
+        <div class="col-sm-4 mb-3">
+            <div class="card card-order" style="height:auto;">
+                    <div class="ico-part">
+                            <div class="item">
+                                    <i class="fa fa-database fa-2x"></i><i class="custom-text">ORDERS</i>
+                            </div>
+                            <div class="item">
+                    <h5 class="count">{{orderCount}}
+                        </h5>
+                    </div>
+                    </div>
+                </div>
+    </div>
+    <div class="col-sm-4 mb-3 mt-2">
+            <div class="card card-revenue" style="height:auto;">
+                    <div class="ico-part">
+                            <div class="item">
+                                    <i class="fa fa-inr fa-3x"></i><i class="custom-text">Revenue</i>
+                            </div>
+                            <div class="item">
+                    <h5 class="count" >{{revenue}}
+                        </h5>
+                    </div>
+                    </div>
+                </div>
+    </div>
+    <div class="col-md-8 mb-3 mt-1">
+        <div class="card">
+        
+            <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"                          
+            ></canvas>
+            </div>
+</div>
+ <div class="col-md-4 mb-3">
+        <div class="card">
+            <i class="card-active-orders">Active Orders</i> <i class="fa fa-refresh" (click)="refreshInfo()" aria-hidden="true"></i>
+            <hr>
+        <b><i class="today-orders">Today's Orders</i></b>
+        <i class="order-count">{{currentOrders}}</i>
+        <hr>
+        <i></i>
+            </div>
+           
+</div> 
+<!-- <div class="col-md-6 mb-3 mt-2">
+        <div class="card">
+        
+            <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"                          
+            ></canvas>
+            </div>
+</div>  -->
+         <!-- <div class="row col-sm-12 align-items-end Dashboard-design">
+            <div class="col-sm-6">
+                <div class="card">
+                    <h4>Deals Analytics</h4>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <h4>Deals Analytics</h4>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

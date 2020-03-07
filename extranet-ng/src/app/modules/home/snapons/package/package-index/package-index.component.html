@@ -1,0 +1,64 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+
+        <div class="hm-gradient">
+            <div class="card1 col-md-12 mb-4">
+                <div class="card-body">
+                    <!--Table-->
+                    <span class="list-text"> Package List</span>
+                    <div>
+                        <button type="submit" class="btn btn-primary custom-btn" routerLink="/package/form">Create</button>
+                    </div>
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Customizable</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody>
+                            <tr
+                                *ngFor="let list of packages | paginate: { itemsPerPage: 10, currentPage: p };let i = index">
+                                <td><i class="fa fa-certificate" aria-hidden="true"></i></td>
+                                <td>{{list.name}}</td>
+                                <td>{{list.price}}</td>
+                                <td><img src={{url+list.imageUrl}} height=50 width=80 alt=""> </td>
+                                <td>{{list.description}}</td>
+                                <td>
+                                    <label class="toggle">
+                                        <input type="checkbox" (click)="onClick($event)" value="{{list | json}}"
+                                            [checked]="list.flag == 1 ? true : false" />
+                                        <span class="slider"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label class="toggle">
+                                        <input type="checkbox" (click)="isCustomizable($event)" value="{{list | json}}"
+                                            [checked]="list.isCustomizable == 'true' ? true : false" />
+                                        <span class="slider"></span>
+                                    </label>
+                                </td>
+                                <td><button type="submit" class="btn btn-primary"
+                                        routerLink="/package/form/{{list.id}}">edit</button></td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

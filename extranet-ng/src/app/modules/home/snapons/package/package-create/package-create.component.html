@@ -1,0 +1,323 @@
+
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+
+        <div class="row align-items-end Dashboard-design">
+            <div class="col-sm-12 mb-4 pl-3">
+                <form class="form-section" [formGroup]="packageForm">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="text">Name:</label>
+                                <input type="text" class="form-control" formControlName="name">
+                            </div>
+                            <div *ngIf="packageForm.controls['name'].invalid && (packageForm.controls['name'].dirty || packageForm.controls['name'].touched)" class="alert alert-danger">
+                              <div *ngIf="packageForm.controls['name'].errors.required">
+                                Name is required.
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="display_price">Display Price:</label>
+                                <input type="number" class="form-control" id="display_price" formControlName="display_price">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="number" class="form-control" id="price" formControlName="price">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="description">Page Title 1:</label>
+                              <input type="text" class="form-control" id="page_title1" formControlName="page_title1">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="description">Page Title 2:</label>
+                              <input type="text" class="form-control" id="page_title2" formControlName="page_title2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control custom-textarea" id="description" placeholder="type here message.." formControlName="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <label for="finger">COLORS:</label>
+                    <span class="all-select" *ngIf="selected_Colors.length>0" (click)="removeColors()">Remove all colors</span>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of selected_Colors"
+                      [selectable]="selectable"
+                      [removable]="removable"
+                      (removed)="removeColor(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      
+
+                    </mat-chip-list>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class= "form-group">
+                          <label for="colors">Colors Gloss:</label>
+                          <span class="all-select" *ngIf="gloss_data.length>0" (click)="allGloss()">All Select</span>
+                          <select (click)="onGlossChange($event.target.value)" class="color_dropdown form-control" name="color-gloss"  multiple>
+                            <option value="null" disable>Select any gloss color</option>
+                            <option *ngFor="let data of gloss_data; let i = index" [value]="gloss_data[i].id">
+                              {{gloss_data[i].title}} :::{{gloss_data[i].id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class= "form-group">
+                          <label for="colors">Colors Matte:</label>
+                          <span class="all-select" *ngIf="matte_data.length>0" (click)="allMatte()">All Select</span>
+                          <select (click)="onMatteChange($event.target.value)" class="color_dropdown form-control" name="color-matte" multiple>
+                            <option value="null" disable>Select any matte color</option>
+                            <option *ngFor="let data of matte_data; let i = index" [value]="matte_data[i].id">
+                              {{matte_data[i].title}} ::: {{matte_data[i].id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class= "form-group">
+                          <label for="cutomize" class="font-weight-bold">Customization:</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class= "form-group">
+                          <label for="finger">Fingers:</label>
+                          <mat-chip-list>
+                            <mat-chip *ngFor = "let item of selected_finger"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(item)"
+                            >{{item}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+
+
+                          </mat-chip-list>
+                        </div>
+                      </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="lf1" (change)="onFingerChange($event.target.value)">LF1
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="lf2" (change)="onFingerChange($event.target.value)">LF2
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="lf3" (change)="onFingerChange($event.target.value)">LF3
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="lf4" (change)="onFingerChange($event.target.value)">LF4
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="lf5" (change)="onFingerChange($event.target.value)">LF5
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                          <!-- empty for alignment-->
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="rf1" (change)="onFingerChange($event.target.value)">RF1
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="rf2" (change)="onFingerChange($event.target.value)">RF2
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="rf3" (change)="onFingerChange($event.target.value)">RF3
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="rf4" (change)="onFingerChange($event.target.value)">RF4
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="form-check">
+                            <label class="form-check-label custom-check">
+                            <input type="checkbox" class="form-check-input" value="rf5" (change)="onFingerChange($event.target.value)">RF5
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr>
+                    <label for=""> <b>SELECTIONS:</b>  </label>
+                    <span class="all-select" *ngIf="selected_customs.length>0" (click)="removeallCustom()">Remove all customization</span>
+                    <mat-chip-list class="mb-4">
+                      <mat-chip *ngFor = "let item of selected_customs"
+                      [selectable]="selectable"
+                      [removable]="removable"
+                      (removed)="removeCustom(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+
+
+                    </mat-chip-list>
+                    <hr>
+                    <div class="row mt-4">
+                      <div class="col-sm-6">
+                        <div class= "form-group">
+                          <label for="colors">Glitter:</label>
+                          <span class="all-select" *ngIf="glitter_data.length>0" (click)="allGlitter()">All Select</span>
+                          <select (click)="onGlitterChange($event.target.value)" class="color_dropdown form-control" name="glitter" multiple>
+                            <option value="null" disable>Select any glitter</option>
+                            <option *ngFor="let data of glitter_data; let i = index" [value]="glitter_data[i].id">
+                              {{glitter_data[i].title}} ::: {{glitter_data[i].id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class= "form-group">
+                          <label for="colors">Pattern:</label>
+                          <span class="all-select" *ngIf="pattern_data.length>0" (click)="allPattern()">All Select</span>
+                          <select (click)="onPatternChange($event.target.value)" class="color_dropdown form-control" name="pattern" multiple >
+                            <option value="null" disable>Select any pattern</option>
+                            <option *ngFor="let data of pattern_data; let i = index" [value]="pattern_data[i].id">
+                              {{pattern_data[i].title}} ::: {{pattern_data[i].id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class= "form-group">
+                          <label for="colors">Sticker:</label>
+                          <span class="all-select" *ngIf="sticker_data.length>0" (click)="allSticker()">All Select</span>
+                          <select (click)="onStickerChange($event.target.value)" class="color_dropdown form-control" name="sticker" multiple>
+                            <option value="null" disable>Select any sticker</option>
+                            <option *ngFor="let data of sticker_data; let i = index" [value]="sticker_data[i].id">
+                              {{sticker_data[i].title}} :::  {{sticker_data[i].id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <div class= "form-group">
+                          <label for="colors">Jewellery:</label>
+                          <span class="all-select" *ngIf="jewellery_data.length>0" (click)="allJewellery()">All Select</span>
+                          <select (click)="onJewelleryChange($event.target.value)" class="color_dropdown form-control" name="jewellery" multiple>
+                            <option value="null" disable>Select any jewellery</option>
+                            <option *ngFor="let data of jewellery_data; let i = index" [value]="jewellery_data[i].id">
+                              {{jewellery_data[i].title}} ::: {{jewellery_data[i].id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="fancy_limit">Fancy nail limit:</label>
+                                <select class="form-control" name="fancy" formControlName="fancy_limit" required>
+                                  <option value="0" selected>Select number of fancy finger</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="offer">Offer Applicable:</label>
+                                <select class="form-control" id="offer" formControlName="offer">
+                                  <option value="0">No offer applicable</option>
+                                  <option value="1">Offer applicable</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="image">Image:</label>
+                              <input type="file" name="image_url"  class="form-control" (change)="imageUpload($event)" required/>
+                              <img  src={{url+pkgImage}} alt="Image" class="thumbnail_image"   alt="" class="thumbnail_image">
+                          </div>
+                      </div>
+                      <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="cta">Call to Action Text:</label>
+                              <input type="text" class="form-control" id="cta" formControlName="cta">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<button type="submit" class="btn btn-primary custom-btn" (click)="onUpdate($event)">Update</button>
+                    *ngIf="!this.isButtonVisible"  [disabled]="packageForm.pristine || packageForm.invalid" class="btn btn-primary custom-btn"
+                    -->
+                    <!-- *ngIf="!this.isButtonVisible"  [disabled]="packageForm.pristine || packageForm.invalid" -->
+                    <button type="submit" (click)="onSubmit(packageForm.value)" *ngIf="!isFormForUpdate" class="btn btn-primary custom-btn">Submit</button>
+                    <button type="submit" (click)="onSubmit(packageForm.value)" *ngIf="isFormForUpdate" class="btn btn-primary custom-btn">Update</button>
+                </form>
+
+            </div>
+        </div>
+
+

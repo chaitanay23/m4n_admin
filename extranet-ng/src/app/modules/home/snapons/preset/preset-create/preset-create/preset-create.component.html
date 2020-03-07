@@ -1,0 +1,286 @@
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+      <div class="row align-items-end Dashboard-design">
+        <div class="col-sm-12 mb-4 pl-3">
+            <form class="form-section" [formGroup]="presetForm" >
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                      <label for="text">Name:</label>
+                      <input type="text" class="form-control"  formControlName="name">
+                  </div>
+                  <div *ngIf="presetForm.controls['name'].invalid && (presetForm.controls['name'].dirty || presetForm.controls['name'].touched)" class="alert alert-danger">
+                    <div *ngIf="presetForm.controls['name'].errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Package:</label>
+                    <select formControlName="package_id" class="form-control" name="package">
+                      <option value="null" disable>Select any package</option>
+                      <option *ngFor="let data of packages" [value]="data.id"  >
+                        {{data.name}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="image">Facade Image:</label>
+                        <input type="file" name="image_url" class="form-control" (change)="imageUpload($event)" required/>
+                        <img  src={{url+presetUrl}} alt="Image" class="thumbnail_image"   alt="" class="thumbnail_image">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="image">Multiple Images:</label>
+                        <input type="file" name="image_url" class="form-control" (change)="multipleUpload($event)" required multiple/>
+                        <div *ngFor="let img of presetUrls">
+                        <img  
+                        src={{url+img}} 
+                        alt="Image" 
+                        class="thumbnail_image"  
+                        >
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Left Finger 1:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of left_finger1"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removelf1(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="left1($event.target.value)" class="form-control mt-2" name="lf1" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Left Finger 2:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of left_finger2"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removelf2(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="left2($event.target.value)" class="form-control mt-2" name="lf2" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Left Finger 3:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of left_finger3"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removelf3(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="left3($event.target.value)" class="form-control mt-2" name="lf3" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Left Finger 4:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of left_finger4"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removelf4(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="left4($event.target.value)" class="form-control mt-2" name="lf4" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Left Finger 5:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of left_finger5"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removelf5(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="left5($event.target.value)" class="form-control mt-2" name="lf5" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Right Finger 1:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of right_finger1"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removeRf1(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="right1($event.target.value)" class="form-control mt-2" name="rf1" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Right Finger 2:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of right_finger2"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removeRf2(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="right2($event.target.value)" class="form-control mt-2" name="rf2" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Right Finger 3:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of right_finger3"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removeRf3(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="right3($event.target.value)" class="form-control mt-2" name="lf3" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Right Finger 4:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of right_finger4"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removeRf4(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="right4($event.target.value)" class="form-control mt-2" name="rf4" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class= "form-group">
+                    <label for="colors">Right Finger 5:</label>
+                    <mat-chip-list>
+                      <mat-chip *ngFor = "let item of right_finger5"
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="removeRf5(item)"
+                      >{{item}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                    <select (click)="right5($event.target.value)" class="form-control mt-2" name="rf5" multiple>
+                      <option value="null" disable>Select items</option>
+                      <option *ngFor="let data of listItems; let i = index" [value]="listItems[i].id">
+                        {{listItems[i].title}}:::{{listItems[i].id}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea class="form-control custom-textarea" id="description" placeholder="type here message.." formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div *ngIf="presetForm.controls['description'].invalid && (presetForm.controls['description'].dirty || presetForm.controls['description'].touched)" class="alert alert-danger">
+                    <div *ngIf="presetForm.controls['description'].errors.required">
+                      Description is required.
+                    </div>
+                  </div>
+            </div>
+
+              <button type="submit" (click)="onSubmit(presetForm.value)"  class="btn btn-primary custom-btn mr-2" *ngIf="!this.isButtonVisible"   class="btn btn-primary custom-btn">Submit</button>
+              <button type="submit" (click)="onSubmit(presetForm.value)"  class="btn btn-primary custom-btn" *ngIf="!this.isButtonVisible"   class="btn btn-primary custom-btn">Update</button>
+            </form>
+        </div>
+      </div>
+
+    </div>
+
+</div>

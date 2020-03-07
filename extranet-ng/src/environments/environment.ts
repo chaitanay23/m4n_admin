@@ -5,7 +5,7 @@
 export const environment = {
 	production: false,
 	prod: 'http://vm1.madfornails.com:3001',
-	url: 'http://localhost:3000'
+	url: 'http://192.168.0.99:3000'
 	// http://192.168.0.99:3000
 	// url_1: 'http://192.168.0.121:3000'
 };

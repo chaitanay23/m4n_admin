@@ -29,6 +29,7 @@ import { PresetIndexComponent } from './modules/home/snapons/preset/preset-index
 import { OrderListComponent } from './modules/home/order/order-list/order-list.component';
 import { OrderShowComponent } from './modules/home/order/order-show/order-show.component';
 import { MatTableModule } from '@angular/material/table';
+import { FileuploadDirective } from './fileupload.directive';
 
 @NgModule({
 	declarations: [
@@ -46,7 +47,8 @@ import { MatTableModule } from '@angular/material/table';
 		PresetCreateComponent,
 		PresetIndexComponent,
 		OrderListComponent,
-		OrderShowComponent
+		OrderShowComponent,
+		FileuploadDirective
 	],
 	imports: [
 		BrowserModule,

@@ -191,7 +191,7 @@ export class MainService {
 			.pipe(retry(1), catchError((val) => of(`I caught:${val}`)));
 	}
 
-	presetCreate(presetData, finger_object, image?: File,images?:File): Observable<any> {
+	presetCreate(presetData, finger_object, image?: File,images?:Array<File>): Observable<any> {
 		var formData: any = new FormData();
 		console.log(presetData);
 		formData.append('name', presetData.name);
@@ -219,7 +219,7 @@ export class MainService {
 			.post(`${this.url}/ext/preset/addPreset`, formData)
 			.pipe(retry(1), catchError((val) => of(`I caught:${val}`)));
 	}
-	presetUpdate(presetData, finger_object,presetId, image?: File,images?:File): Observable<any> {
+	presetUpdate(presetData, finger_object,presetId, image?: File,images?:Array<File>): Observable<any> {
 		
 		var formData: any = new FormData();
 		formData.append('name', presetData.name);

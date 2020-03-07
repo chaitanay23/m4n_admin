@@ -30,17 +30,18 @@
               </div>
               <div class="row">
                 <div class="col-sm-6">
-                    <div class="form-group">
+                    <div  class="form-group ">
                         <label for="image">Facade Image:</label>
-                        <input type="file" name="image_url" class="form-control" (change)="imageUpload($event)" required/>
-                        <img  src={{url+presetUrl}} alt="Image" class="thumbnail_image"   alt="" class="thumbnail_image">
+                        <div class="multipleImages">
+                          <img  src={{url+presetUrl}} alt="Image" class="thumbnail_image"   alt="" class="thumbnail_image">
+
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
+                   </div>
+                   <div class="col-md-6">
+                    <div  class="form-group">
                         <label for="image">Multiple Images:</label>
-                        <input type="file" name="image_url" class="form-control" (change)="multipleUpload($event)" required multiple/>
-                        <div *ngFor="let img of presetUrls">
+                        <div class="multipleImages" *ngFor="let img of presetUrls">
                         <img  
                         src={{url+img}} 
                         alt="Image" 
@@ -49,6 +50,25 @@
                       </div>
                     </div>
                 </div>
+                 <div class="dropzone row" appFileupload (fileDropped)="imageUpload($event)">
+                  <div class="filedrop col-md-6">
+                    <div class="form-group"  *ngFor="let file of files">
+                      <h3 class="filestext">{{file?.name}}</h3>
+                    </div>
+                    
+                  </div>
+                  <div class="filedrop col-sm-6">
+                    <div class="form-group">
+                      <input class="dragInput" type="file" #fileDropref id="fileDropRef" (change)="multipleUpload($event.target.files)" multiple/>
+                      <!-- <img src="/extranet-ng/src/assets/drop.png"  alt=""/> -->
+                      <img src="../../../../../../../assets/drop3.png " width="50%">
+                      <h3>Drop files</h3>
+                      <label class="dragLabel" for="fileDropRef">Browse for files</label>
+                    </div>
+                    
+                  </div>
+                </div>
+
               </div>
               <div class="row">
                 <div class="col-sm-6">
@@ -276,7 +296,7 @@
             </div>
 
               <button type="submit" (click)="onSubmit(presetForm.value)"  class="btn btn-primary custom-btn mr-2" *ngIf="!this.isButtonVisible"   class="btn btn-primary custom-btn">Submit</button>
-              <button type="submit" (click)="onSubmit(presetForm.value)"  class="btn btn-primary custom-btn" *ngIf="!this.isButtonVisible"   class="btn btn-primary custom-btn">Update</button>
+              
             </form>
         </div>
       </div>

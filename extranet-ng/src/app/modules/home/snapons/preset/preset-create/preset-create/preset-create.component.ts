@@ -15,11 +15,12 @@ import { element } from 'protractor';
 export class PresetCreateComponent implements OnInit {
 	url = environment.url;
 	packages: [] = [];
+	files :any = [];
 	listItems: [] = [];
 	removable = true;
 	presetForm: FormGroup;
 	facade: File;
-	images: File;
+	images: Array<File>;
 	left_finger1: Array<Object> = [];
 	left_finger2: Array<Object> = [];
 	left_finger3: Array<Object> = [];
@@ -231,14 +232,28 @@ export class PresetCreateComponent implements OnInit {
 	}
 
 	imageUpload(event) {
-		this.facade = event.target.files[0];
+		this.files = event;
+		
+		let file = []
+		this.facade = event[0];
+		for(var i = 1;i <= event.length - 1 ; i++){
+			file.push(event[i]);
+		}
+		this.images = file;
+		console.log(this.images);
+		
 	}
 
 	multipleUpload(event) {
-		 if(event.target.files.length > 1){
-			this.images = event.target.files;
-			console.log(this.images);
+		this.files = event;
+		let file = []
+		this.facade = event[0];
+		for(var i = 1;i <= event.length - 1 ; i++){
+			file.push(event[i]);
 		}
+		this.images = file;
+		console.log(this.facade);
+		console.log(this.images);
 	}
 
 	onSubmit() {
